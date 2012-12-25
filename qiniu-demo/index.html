@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport" />
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" />
+  <title>5分钟玩转七牛云存储</title>
+  <!-- style sheet links -->
+  <meta name="copyright" content="Copyright &copy; 2012, 七牛云存储, 版权所有 | 幻灯片由七牛云存储+qrsync托管分发" />
+  
+  <meta name="duration" content="5" />
+  
+  <link rel="stylesheet" type="text/css" media="screen, projection, print" href="../styles/slidy.css" />
+  
+<link rel="stylesheet" type="text/css" media="screen, projection, print"
+ href="../styles/theme/qiniu/main.css" />
+
+  <!--[if lt IE 9]>
+  <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <script src="../scripts/slidy.js"></script>
+  <script src="../scripts/screenfull.js"></script>
+</head>
+
+<body>
+
+
+<div class="background">
+  <span class="background-inner-wrapper">
+  </span>
+</div>
+
+
+
+
+
+<div class="cover titlepage slide">
+  <p><img src="assets/gift.jpg" alt="Gift" class="cover" style="float:right;margin:1em" /></p>
+
+<h1 id="section">5分钟玩转七牛云存储</h1>
+
+<ul class="author">
+  <li>徐倒立@七牛云存储</li>
+</ul>
+<ul class="date">
+  <li>2012-12-15</li>
+</ul>
+
+</div>
+
+<div class="slide">
+  <h1 id="section">基本概念篇</h1>
+
+<blockquote>
+  <p>七牛云存储——专为互联网 WEB2.0 和移动 APP 上的内容提供云存储、云处理、云加速服务。</p>
+</blockquote>
+
+<ul class="incremental">
+  <li><strong>云存储</strong> (存储 web2.0/app 内容、文件、非结构化数据)</li>
+  <li><strong>云处理</strong> (图片/音频/视频 在线转换/压缩处理，自定义数据处理)</li>
+  <li><strong>云加速</strong> (上传 / 下载双向加速，全球数百家加速节点覆盖, 300+)</li>
+</ul>
+
+</div>
+
+<div class="slide">
+  <h1 id="section">功能特性篇</h1>
+
+<ul>
+  <li>上传/下载 双向加速（每一个服务器都是 读/写/同步 节点）</li>
+  <li>支持 断点续上传、断点续下载</li>
+  <li>单文件上传无大小限制</li>
+  <li>支持跨域上传（CORS）</li>
+  <li>云端数据处理（图像/音频/视频 在线压缩/转换处理）</li>
+  <li>SSL 访问支持</li>
+  <li>more …</li>
+</ul>
+
+</div>
+
+<div class="slide">
+  <h1 id="section">接入使用篇</h1>
+
+<ul>
+  <li>注册账号</li>
+  <li>上传工具 qrsync（一键搬迁上传数据）</li>
+  <li>开发辅助调试工具 qboxrsctl （命令行的 API 实现）</li>
+  <li>API &amp; SDK</li>
+  <li>文件下载</li>
+  <li>云端数据处理</li>
+</ul>
+
+</div>
+
+<div class="slide">
+  <h2 id="section">注册账号</h2>
+
+<p><a href="https://dev.qiniutek.com/signup">https://dev.qiniutek.com/signup</a></p>
+
+<blockquote>
+  <p>现场申请账号的团队注册后发微博 <a href="http://e.weibo.com/qiniutek">@七牛云存储</a>，团队成员均可获得<strong>100元现金券</strong></p>
+</blockquote>
+
+<blockquote>
+  <p>不注册也可直接使用我们提供准备好的公共账号</p>
+</blockquote>
+
+</div>
+
+<div class="slide">
+  <h2 id="qrsync">同步工具 qrsync</h2>
+
+<p>建立配置文件（比如命名为 <code>config.json</code>）</p>
+
+<pre class="javascript" style="font-size:50%"><code>{
+    "access_key": "&lt;公钥&gt;",
+    "secret_key": "&lt;私钥&gt;",
+    "bucket": "&lt;空间名称&gt;",
+    "sync_dir": "&lt;本地同步目录（绝对路径）&gt;",
+    "domains": ["foo.dn.qbox.me", "bar.qiniudn.com"],
+    "debug_level": 0
+}
+</code></pre>
+
+<p>执行同步上传操作</p>
+
+<pre class="console" style="font-size:50%"><code>./qrsync /path/to/config.json // for Linux or MacOS
+
+qrsync.exe /path/to/config.json // for Windows
+</code></pre>
+
+<p>文件访问方式</p>
+
+<pre class="console" style="font-size:50%"><code>http://&lt;绑定域名&gt;/&lt;文件名(可带斜杠)&gt;
+
+http://foo.dn.qbox.me/a.txt
+http://foo.dn.qbox.me/a/b/c.txt
+</code></pre>
+
+<p>详见：<a href="http://docs.qiniutek.com/v3/tools/qrsync/">http://docs.qiniutek.com/v3/tools/qrsync/</a></p>
+
+</div>
+
+<div class="slide">
+  <h2 id="qboxrsctl">开发辅助调试工具 qboxrsctl</h2>
+
+<pre><code>qboxrsctl login &lt;email&gt; &lt;password&gt;
+qboxrsctl // 查看命令列表
+</code></pre>
+
+<p>详见：<a href="http://docs.qiniutek.com/v3/tools/qboxrsctl/">http://docs.qiniutek.com/v3/tools/qboxrsctl/</a></p>
+
+</div>
+
+<div class="slide">
+  <h2 id="api--sdk">API &amp; SDK</h2>
+
+<ul>
+  <li>iOS、Android、NodeJS、Ruby、Python、PHP、Java、C/C++、C#、Perl、Golang</li>
+  <li>详见: <a href="http://docs.qiniutek.com">http://docs.qiniutek.com</a></li>
+</ul>
+
+</div>
+
+<div class="slide">
+  <h2 id="section">文件下载</h2>
+
+<ul>
+  <li>公有资源
+    <ul>
+      <li><code>http://&lt;绑定域名&gt;/&lt;key&gt;</code></li>
+    </ul>
+  </li>
+  <li>私有资源
+    <ul>
+      <li>通过 SDK 提供的 get 方法获取带临时授权凭证的下载URL</li>
+    </ul>
+  </li>
+</ul>
+
+</div>
+
+<div class="slide">
+  <h2 id="section">云端数据处理</h2>
+
+<ul>
+  <li>图像在线处理
+    <ul>
+      <li><a href="http://docs.qiniutek.com/v3/api/foimg/">http://docs.qiniutek.com/v3/api/foimg/</a></li>
+      <li><a href="https://dev.qiniutek.com/buckets">https://dev.qiniutek.com/buckets</a> (可自定义缩略图规格)</li>
+    </ul>
+  </li>
+  <li>音频/视频在线处理
+    <ul>
+      <li><a href="http://shijy.dn.qbox.me/avthumb.html">http://shijy.dn.qbox.me/avthumb.html</a></li>
+    </ul>
+  </li>
+</ul>
+
+</div>
+
+<div class="slide">
+  <h2 id="section">帮助支持篇</h2>
+
+<p>24 小时不间断互动</p>
+
+<ul>
+  <li>现场 - 面对面交流</li>
+  <li>QQ - 591515408、532136411、1052348240 （注明黑客马拉松-团队名）</li>
+  <li>邮箱 - <a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#113;&#105;&#110;&#105;&#117;&#116;&#101;&#107;&#046;&#099;&#111;&#109;">&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#113;&#105;&#110;&#105;&#117;&#116;&#101;&#107;&#046;&#099;&#111;&#109;</a></li>
+  <li>微博 - <a href="http://e.weibo.com/qiniutek">@七牛云存储</a> <a href="http://weibo.com/awhy">@飞天急速徐倒立</a> <a href="http://weibo.com/ikbear">@ikbear</a></li>
+</ul>
+
+
+</div>
+
+<div class="slide">
+  <h2 id="good-luck">Good Luck!</h2>
+
+<p><img src="assets/gift-new-ipad.jpg" alt="赢牛排，还能把美女抱回家，冲！" class="cover" style="float:right" />
+<img src="assets/gift.jpg" alt="赢牛排，还能把美女抱回家，冲！" /></p>
+
+</div>
+
+
+<script type="text/javascript">
+
+var body = document.getElementsByTagName('body')[0];
+
+// full screen
+body.addEventListener('click', function(e) {
+    if (screenfull.enabled) {
+        screenfull.request();
+    }
+});
+
+// for ipad
+body.addEventListener('touchstart', function(e) {
+  this.startX = e.touches[0].pageX;
+}, false);
+body.addEventListener('touchmove', function(e) {
+  if (this.startX != null && e.touches.length == 1) {
+    var delta = e.touches[0].pageX - this.startX;
+    if (delta < -100) {
+      this.startX = e.touches[0].pageX;
+      w3c_slidy.next_slide(false);
+      e.preventDefault();
+    } else if (delta > 100) {
+      this.startX = e.touches[0].pageX;
+      w3c_slidy.previous_slide(false);
+      e.preventDefault();
+    }
+  }
+}, true);
+</script>
+</body>
+</html>
